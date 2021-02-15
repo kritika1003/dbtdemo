@@ -1,0 +1,54 @@
+name: Dbt_demo
+profile: snowflake
+version: '4.1'
+require-dbt-version: ['>=0.14.0', '<0.20.0']
+config-version: 2
+
+analysis-paths:
+  - analysis
+clean-targets:
+  - target
+data-paths:
+  - data
+macro-paths:
+  - macros
+source-paths:
+  - models
+test-paths:
+  - tests
+target-path: target
+
+vars:
+    LOAD_DATE: '2021-02-08 00:00:00.000'
+    hash: 'MD5'
+    
+models:
+  Dbt_demo:
+    raw_stage:
+      schema: 'RAW'
+      tags:
+        - 'raw'
+      materialized: view
+    stage: 
+      schema: 'STG'
+      tags:
+        - 'stage'
+      enabled: true
+      materialized: view
+    raw_vault:
+      schema: 'RAW_VLT'
+      tags:
+        - 'raw_vault'
+      materialized: incremental
+      hubs:
+        tags:
+          - 'hub'
+      links:
+        tags:
+          - 'link'
+      sats:
+        tags:
+          - 'satellite' 
+      
+
+  

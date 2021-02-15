@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: tpch_sample
+    database: DATAVAULT_DEV
+    schema: DATA
+    tables:
+      - name: SUPPLIERS
+      - name: PRODUCTS
+
